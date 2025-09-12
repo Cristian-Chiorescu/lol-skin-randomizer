@@ -1,5 +1,5 @@
-import { getAllChampionIcons } from "./lib/data";
-import ChampionGridIcon from "./ChampionGridIcon";
+import { getAllChampionIcons } from "@/lib/data";
+import ChampionGridIcon from "@/components/ChampionGridIcon";
 
 export default async function Page() {
   const championData = await getAllChampionIcons();
