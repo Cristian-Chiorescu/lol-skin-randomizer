@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LoL Skin Radnomizer",
+  title: "LoL Skin Randomizer",
   description: "An app that randomly picks a skin for you to choose.",
 };
 

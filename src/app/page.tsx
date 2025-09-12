@@ -1,5 +1,6 @@
 import { getAllChampionIcons } from "@/lib/data";
-import ChampionGridIcon from "@/components/ChampionGridIcon";
+
+import ChampionGrid from "@/components/ChampionGrid";
 
 export default async function Page() {
   const championData = await getAllChampionIcons();
@@ -12,14 +13,7 @@ export default async function Page() {
 
   return (
     <div>
-      <div className="bg-white h-10 flex justify-center">
-        <input type="text" placeholder="filter champions..." />
-      </div>
-      <div className="min-h-screen grid grid-cols-6 bg-blue-200 gap-4">
-        {championList.map((championName) => (
-          <ChampionGridIcon key={championName} championName={championName} />
-        ))}
-      </div>
+      <ChampionGrid championList={championList} />
     </div>
   );
 }
