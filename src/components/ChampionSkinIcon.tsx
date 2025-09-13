@@ -1,21 +1,25 @@
 import Image from "next/image";
 
 type ChampionSkinIconProps = {
-  skin: { num: any; name: any };
+  skin: any;
   championName: string;
   handleClick: any;
+  isSelected: boolean;
 };
 
 export default function ChampionSkinIcon({
   skin,
   championName,
   handleClick,
+  isSelected,
 }: ChampionSkinIconProps) {
   return (
     <button
-      className="relative rounded-xl overflow-hidden h-40 brightness-75 hover:brightness-125 hover:cursor-pointer hover:-translate-y-2 transition"
-      id={skin.num}
-      onClick={() => handleClick(skin.num)}
+      className={`relative rounded-xl overflow-hidden aspect-[308/560]
+                  transition hover:-translate-y-1 ring-2 ${
+                    isSelected ? "ring-cyan-400" : "ring-transparent"
+                  }`}
+      onClick={() => handleClick(skin)}
     >
       <Image
         src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${championName}_${skin.num}.jpg`}
