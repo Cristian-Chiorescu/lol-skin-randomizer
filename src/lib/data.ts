@@ -24,6 +24,7 @@ export async function getChampionData(championName: string) {
     const data = await response.json();
     return data;
   } catch (error) {
+    console.error(error);
     throw new Error("Failed to fetch champion skins");
   }
 }

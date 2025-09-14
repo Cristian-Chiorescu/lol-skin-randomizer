@@ -6,8 +6,7 @@ import ChampionGrid from "@/components/ChampionGrid";
 export default async function Page() {
   const championData = await getAllChampionIcons();
   const championListObject = championData.data;
-  let championList = [];
-  let championProperNameObject = {};
+  const championList = [];
 
   for (const key in championListObject) {
     championList.push(key);

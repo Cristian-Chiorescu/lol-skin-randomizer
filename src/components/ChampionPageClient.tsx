@@ -1,15 +1,16 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ChampionSkinIcon from "./ChampionSkinIcon";
 import Image from "next/image";
 import RandomizeButton from "./RandomizeButton";
+import { FullChampionData, Skin } from "@/lib/types";
 
 export default function ChampionPageClient({
   champion,
   championName,
 }: {
-  champion: any;
+  champion: FullChampionData;
   championName: string;
 }) {
   const { name, title, skins } = champion;
@@ -17,7 +18,7 @@ export default function ChampionPageClient({
   const [isRandomizing, setIsRandomizing] = useState(false);
   const [isHighlighting, setIsHighlighting] = useState(false);
 
-  const handleSkinSelect = (skin: any) => {
+  const handleSkinSelect = (skin: Skin) => {
     setCurrentSkin(skin);
   };
 
@@ -28,7 +29,7 @@ export default function ChampionPageClient({
   useEffect(() => {
     if (isRandomizing) {
       const interval = setInterval(() => {
-        let randomIndex = Math.floor(Math.random() * skins.length);
+        const randomIndex = Math.floor(Math.random() * skins.length);
         setCurrentSkin(skins[randomIndex]);
       }, 200);
 
@@ -100,7 +101,7 @@ export default function ChampionPageClient({
         <div className="mt-8">
           <h4 className="text-xl font-semibold mb-4">Available Skins</h4>
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-4 pb-6">
-            {skins.map((skin: any) => (
+            {skins.map((skin: Skin) => (
               <ChampionSkinIcon
                 key={skin.id}
                 skin={skin}

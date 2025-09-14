@@ -4,13 +4,14 @@ import { useState } from "react";
 import ChampionGridIcon from "./ChampionGridIcon";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { ChampionListObject } from "@/lib/types";
 
 export default function ChampionGrid({
   championList,
   championListObject,
 }: {
   championList: string[];
-  championListObject: any;
+  championListObject: ChampionListObject;
 }) {
   const [inputFilter, setInputFilter] = useState("");
 

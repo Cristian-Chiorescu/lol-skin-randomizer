@@ -1,9 +1,10 @@
 import Image from "next/image";
+import { Skin } from "@/lib/types";
 
 type ChampionSkinIconProps = {
-  skin: any;
+  skin: Skin;
   championName: string;
-  handleClick: any;
+  handleClick: (skin: Skin) => void;
   isSelected: boolean;
 };
 
