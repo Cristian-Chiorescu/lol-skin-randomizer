@@ -6,7 +6,7 @@ export type ChampionDetail = {
   title: string;
   blurb: string;
   info: { [key: string]: number };
-  image: { [key: string]: any };
+  image: { [key: string]: ImageInfo };
   tags: string[];
   partype: string;
   stats: { [key: string]: number };
@@ -77,8 +77,14 @@ export type SpellInfo = {
   datavalues: object;
   effect: (number[] | null)[];
   effectBurn: (string | null)[];
-  vars: any[];
+  vars: SpellVar[];
   maxammo: string;
+};
+
+export type SpellVar = {
+  key: string;
+  link: string;
+  coeff: number | number[];
 };
 
 export type ChampionSkin = {
@@ -110,7 +116,7 @@ export type FullChampionData = {
   stats: ChampionStats;
   spells: SpellInfo[];
   passive: PassiveInfo;
-  recommended: any[];
+  recommended: object[];
 };
 
 export type Skin = {
