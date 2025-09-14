@@ -16,7 +16,7 @@ export default function ChampionSkinIcon({
   return (
     <button
       className={`relative rounded-xl overflow-hidden aspect-[308/560]
-                  transition hover:-translate-y-1 ring-2 ${
+                  transition hover:-translate-y-2 hover:cursor-pointer ring-2 ${
                     isSelected ? "ring-cyan-400" : "ring-transparent"
                   }`}
       onClick={() => handleClick(skin)}
