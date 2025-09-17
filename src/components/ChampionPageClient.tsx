@@ -31,7 +31,7 @@ export default function ChampionPageClient({
       const interval = setInterval(() => {
         const randomIndex = Math.floor(Math.random() * skins.length);
         setCurrentSkin(skins[randomIndex]);
-      }, 200);
+      }, 250);
 
       const timeout = setTimeout(() => {
         clearInterval(interval);
@@ -50,7 +50,7 @@ export default function ChampionPageClient({
           clearTimeout(timeout);
           clearTimeout(highlightingTimeout);
         };
-      }, 2000);
+      }, 2500);
 
       return () => {
         clearInterval(interval);
@@ -113,6 +113,19 @@ export default function ChampionPageClient({
           </div>
         </div>
       </main>
+      {/* Preloading Images */}
+      <div className="absolute w-px h-px overflow-hidden -z-10">
+        {skins.map((skin: Skin) => (
+          <Image
+            key={skin.id}
+            src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championName}_${skin.num}.jpg`}
+            alt=""
+            width={100}
+            height={100}
+            priority={false}
+          ></Image>
+        ))}
+      </div>
     </div>
   );
 }
