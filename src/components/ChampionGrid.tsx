@@ -27,7 +27,7 @@ export default function ChampionGrid({
     <div>
       <div className="md:mt-10 rounded-2xl bg-black/10 border border-white/10 p-6 sm:p-8 backdrop-blur-lg">
         <header className="text-center space-y-3">
-          <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+          <h1 className="text-3xl sm:text-4xl tracking-tight font-russo">
             Choose Your Champion
           </h1>
           <p className="text-slate-300/80 text-sm sm:text-base">

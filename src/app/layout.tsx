@@ -1,22 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Russo_One } from "next/font/google";
 import Footer from "@/components/Footer";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/next";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
+  display: "swap",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const russo = Russo_One({
+  variable: "--font-russo",
+  display: "swap",
+  weight: "400",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "LoL Skin Randomizer",
-  description: "An app that randomly picks a skin for you to choose.",
+  description: "An app that chooses a League of Legends skin for you",
 };
 
 export default function RootLayout({
@@ -25,10 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" className={`${inter.variable} ${russo.variable}`}>
+      <body className={`antialiased`}>
         {children}
         <Footer />
         <Analytics />
