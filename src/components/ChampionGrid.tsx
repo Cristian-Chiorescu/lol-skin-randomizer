@@ -46,8 +46,6 @@ export default function ChampionGrid({
     setSelectedClass(className);
   };
 
-  console.log(filteredChampionList);
-
   return (
     <div>
       <div className="md:mt-10 rounded-2xl bg-black/10 border border-white/10 p-6 sm:p-8 backdrop-blur-lg">
