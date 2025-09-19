@@ -5,6 +5,8 @@ import ChampionSkinIcon from "./ChampionSkinIcon";
 import Image from "next/image";
 import RandomizeButton from "./RandomizeButton";
 import { FullChampionData, Skin } from "@/lib/types";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import next from "next";
 
 export default function ChampionPageClient({
   champion,
@@ -23,54 +25,70 @@ export default function ChampionPageClient({
   };
 
   const handleRandomize = () => {
-    setIsRandomizing(true);
+    if (!isRandomizing) {
+      setIsRandomizing(true);
+    }
   };
 
   useEffect(() => {
-    if (isRandomizing) {
-      const interval = setInterval(() => {
+    if (!isRandomizing) return;
+
+    const timeoutId = setTimeout(() => {
+      setIsRandomizing(false);
+
+      let nextSkin;
+
+      do {
         const randomIndex = Math.floor(Math.random() * skins.length);
-        setCurrentSkin(skins[randomIndex]);
-      }, 250);
+        nextSkin = skins[randomIndex];
+      } while (nextSkin.id === currentSkin.id && skins.length > 1);
+      setCurrentSkin(nextSkin);
+      setIsHighlighting(true);
+    }, 2000);
 
-      const timeout = setTimeout(() => {
-        clearInterval(interval);
-        setIsRandomizing(false);
-
-        const finalRandomIndex = Math.floor(Math.random() * skins.length);
-        setCurrentSkin(skins[finalRandomIndex]);
-
-        setIsHighlighting(true);
-        const highlightingTimeout = setTimeout(() => {
-          setIsHighlighting(false);
-        }, 1000);
-
-        return () => {
-          clearTimeout(interval);
-          clearTimeout(timeout);
-          clearTimeout(highlightingTimeout);
-        };
-      }, 2500);
-
-      return () => {
-        clearInterval(interval);
-        clearTimeout(timeout);
-      };
-    }
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [isRandomizing, skins]);
+
+  useEffect(() => {
+    if (!isHighlighting) return;
+
+    const highlightTimeoutId = setTimeout(() => {
+      setIsHighlighting(false);
+    }, 1000);
+
+    return () => clearTimeout(highlightTimeoutId);
+  }, [isHighlighting]);
 
   return (
     <div>
       <div
         className={`transition relative w-full max-w-screen-2xl mx-auto h-[40vh] md:h-[60vh] overflow-hidden ${
           isHighlighting ? "highlight-result" : ""
-        } ${isRandomizing ? "blur-sm brightness-50" : "blur-0 brightness-100"}`}
+        }`}
       >
+        <div
+          className={`absolute inset-0 z-20 flex justify-center ${
+            isRandomizing ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+        >
+          <div className="w-1/2 max-w-[250px] sm:max-w-[300px]">
+            <DotLottieReact
+              src="https://lottie.host/ccee6f2d-63f0-4695-bc02-b8e6b7ad2273/BUubHtR5Gi.lottie"
+              autoplay
+              loop
+              className="w-full h-full"
+            />
+          </div>
+        </div>
         <Image
           src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championName}_${currentSkin.num}.jpg`}
           alt={`Splash art of ${currentSkin.name}`}
           fill
-          className="object-cover object-top overflow-hidden"
+          className={`object-cover object-top overflow-hidden ${
+            isRandomizing && "blur-xl brightness-50"
+          }`}
           priority
           sizes="100vw"
         />
@@ -86,7 +104,7 @@ export default function ChampionPageClient({
           <div className="text-center">
             <h2
               className={`text-xl md:text-2xl text-slate-300 font-semibold ${
-                isRandomizing ? "blur-sm" : "blur-0"
+                isRandomizing ? "opacity-0 pointer-events-none" : "opacity-100"
               }`}
             >
               {currentSkin.name === "default" ? "Original" : currentSkin.name}
