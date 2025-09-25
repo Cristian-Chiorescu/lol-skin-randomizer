@@ -38,10 +38,9 @@ export default function ChampionPageClient({
 
       let nextSkin;
 
-      do {
-        const randomIndex = Math.floor(Math.random() * skins.length);
-        nextSkin = skins[randomIndex];
-      } while (nextSkin.id === currentSkin.id && skins.length > 1);
+      const randomIndex = Math.floor(Math.random() * skins.length);
+      nextSkin = skins[randomIndex];
+
       setCurrentSkin(nextSkin);
       setIsHighlighting(true);
     }, 2000);
