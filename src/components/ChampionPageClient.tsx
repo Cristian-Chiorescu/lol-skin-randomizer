@@ -36,12 +36,9 @@ export default function ChampionPageClient({
     const timeoutId = setTimeout(() => {
       setIsRandomizing(false);
 
-      let nextSkin;
-
       const randomIndex = Math.floor(Math.random() * skins.length);
-      nextSkin = skins[randomIndex];
 
-      setCurrentSkin(nextSkin);
+      setCurrentSkin(skins[randomIndex]);
       setIsHighlighting(true);
     }, 2000);
 
